@@ -59,7 +59,7 @@ public class RedisOperater {
         return stringValueRedisTemplate.opsForList().leftPush(key, value);
     }
 
-    public Long push(String key, String value) {
+    public Long rpush(String key, String value) {
         return stringValueRedisTemplate.opsForList().rightPush(key, value);
     }
 
@@ -67,7 +67,7 @@ public class RedisOperater {
         return stringValueRedisTemplate.opsForList().leftPop(key);
     }
 
-    public String pop(String key) {
+    public String rpop(String key) {
         return stringValueRedisTemplate.opsForList().rightPop(key);
     }
 
