@@ -24,8 +24,8 @@ public class TestController {
 
     @Test
     public void test() {
-        Map<String, String> userInfo = userService.getUserDetail(1L, EntityStatus.STATUS_ACTIVE.getValue());
-        System.out.println(userInfo);
+
+
     }
 
     @Test
@@ -49,7 +49,7 @@ public class TestController {
     }
 
     public Pair<User, UserDetail> getUser() {
-        String name = "A·San";
+        String name = "A·Da";
         User   user = new User();
         user.setUserName(name);
         user.setAge(30);
