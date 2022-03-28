@@ -134,7 +134,7 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--按时间保存日志 修改格式可以按小时、按天、月来保存-->
-            <fileNamePattern>${logging.file.path}/methodLog.log</fileNamePattern>
+            <fileNamePattern>${logging.file.path}/methodLog.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!--保存时长-->
             <MaxHistory>1</MaxHistory>
             <!--文件大小-->
