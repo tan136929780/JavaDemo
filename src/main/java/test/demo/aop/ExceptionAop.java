@@ -1,5 +1,6 @@
 package test.demo.aop;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,9 +17,8 @@ import java.sql.SQLException;
 
 @Component
 @Aspect
+@Slf4j(topic = "exceptionLog")
 public class ExceptionAop {
-    public static final Logger logger = LoggerFactory.getLogger("exceptionLog");
-
     @Pointcut("execution(* test.demo.controller.*.*(..))")
     public void pointCut() {
     }
@@ -29,11 +29,11 @@ public class ExceptionAop {
         try {
             returnResult = (ReturnResult) jointPoint.proceed(jointPoint.getArgs());
         } catch (IOException ioException) {
-            logger.error("I/O Exception:", ioException);
+            log.error("I/O Exception:", ioException);
         } catch (SQLException sqlException) {
-            logger.error("SQL Exception:", sqlException);
+            log.error("SQL Exception:", sqlException);
         } catch (Exception exception) {
-            logger.error("Exception:", exception);
+            log.error("Exception:", exception);
             returnResult = ResponseUtil.failed(exception.getMessage());
         }
         return returnResult;
