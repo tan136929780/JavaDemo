@@ -119,13 +119,40 @@
         </rollingPolicy>
     </appender>
 
+    <appender name="methodLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--按时间保存日志 修改格式可以按小时、按天、月来保存-->
+            <fileNamePattern>${logging.file.path}/methodLog.log</fileNamePattern>
+            <!--保存时长-->
+            <MaxHistory>1</MaxHistory>
+            <!--文件大小-->
+            <totalSizeCap>10MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
     <!--这里的name和业务类中的getLogger中的字符串是一样的-->
     <logger name="commonLog" level="INFO" additivity="false">
         <appender-ref ref="commonLog"/>
     </logger>
-z
+
     <logger name="requestLog" level="INFO" additivity="false">
         <appender-ref ref="requestLog"/>
+    </logger>
+
+    <logger name="methodLog" level="INFO" additivity="false">
+        <appender-ref ref="methodLog"/>
     </logger>
 
     <logger name="exceptionLog" additivity="false">
