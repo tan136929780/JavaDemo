@@ -13,7 +13,10 @@ import test.demo.model.PageResult;
 import test.demo.model.entity.User;
 import test.demo.model.entity.UserDetail;
 import test.demo.service.UserService;
+import test.demo.task.TestTask;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 
 @SpringBootTest
@@ -23,9 +26,18 @@ public class TestController {
     UserService userService;
 
     @Test
-    public void test() {
+    public void testThread() {
+        Callable callable = new TestTask();
+        for (int i = 0; i < 10; i++) {
+            try {
+                FutureTask task = new FutureTask<>(callable);
+                new Thread(task, "子线程" + i).start();
 
-
+                System.out.println("子线程返回值：" + task.get() + "\n");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Test

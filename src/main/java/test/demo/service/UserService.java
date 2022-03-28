@@ -88,7 +88,7 @@ public class UserService {
             Map<String, String> userInfo = userMapper.selectUserDetail(id, status);
             userCache = JacksonUtil.toJSONString(userInfo);
             if (userInfo != null) {
-                redisOperater.set(cacheKey, userCache);
+                redisOperater.setWithExpire(cacheKey, userCache, 1000);
             }
             user = JacksonUtil.toMap(userCache);
         }

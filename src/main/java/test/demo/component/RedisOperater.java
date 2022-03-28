@@ -26,6 +26,9 @@ public class RedisOperater {
     public void set(String key, String value) {
         stringValueRedisTemplate.opsForValue().set(key, value);
     }
+    public void setWithExpire(String key, String value, long time) {
+        stringValueRedisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+    }
 
     public Boolean delate(String key) {
         return stringValueRedisTemplate.delete(key);
