@@ -17,6 +17,7 @@ import test.demo.enums.Gender;
 import test.demo.model.PageResult;
 import test.demo.model.entity.User;
 import test.demo.model.entity.UserDetail;
+import test.demo.model.entity.UserInfo;
 import test.demo.model.mapper.UserDetailMapper;
 import test.demo.model.mapper.UserMapper;
 import test.demo.utils.JacksonUtil;
@@ -43,7 +44,9 @@ public class UserService {
     private final String PERFIX = "USER:";
 
     @Transactional
-    public Pair<Boolean, String> saveUser(User user, UserDetail userDetail) throws Exception {
+    public Pair<Boolean, String> saveUser(UserInfo userInfo) throws Exception {
+        User                  user           = userInfo.getUser();
+        UserDetail            userDetail     = userInfo.getUserDetail();
         Pair<Boolean, String> validateResult = commonValidator.validateUser(user);
         if (validateResult.getKey()) {
             return Pair.of(false, User.class + ":" + validateResult.getValue() + ": validate failed!");
@@ -116,7 +119,22 @@ public class UserService {
         return pageResult;
     }
 
-    public Map<String, String> getUserDetail(Long id, Integer status) {
-        return userMapper.selectUserDetail(id, status);
+    public Pair<Boolean, String> updateUser(Long id, UserInfo userInfo) {
+        User                  user           = userInfo.getUser();
+        UserDetail            userDetail     = userInfo.getUserDetail();
+        Pair<Boolean, String> validateResult = commonValidator.validateUser(user);
+        if (validateResult.getKey()) {
+            return Pair.of(false, User.class + ":" + validateResult.getValue() + ": validate failed!");
+        }
+        validateResult = commonValidator.validateUserDetail(userDetail);
+        if (validateResult.getKey()) {
+            return Pair.of(false, UserDetail.class + ":" + validateResult.getValue() + ": validate failed!");
+        }
+        return Pair.of(true, "修改成功");
+    }
+
+    public Pair<Boolean, String> deleteUser(Long id) {
+        Integer res = userMapper.deleteUserInfo(id);
+        return Pair.of(res > 0, res > 0 ? "删除成功" : "删除失败");
     }
 }

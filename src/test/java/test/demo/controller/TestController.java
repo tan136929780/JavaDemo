@@ -12,8 +12,10 @@ import test.demo.enums.Gender;
 import test.demo.model.PageResult;
 import test.demo.model.entity.User;
 import test.demo.model.entity.UserDetail;
+import test.demo.model.entity.UserInfo;
 import test.demo.service.UserService;
 import test.demo.task.TestTask;
+
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
@@ -42,8 +44,8 @@ public class TestController {
 
     @Test
     public void testInsert() throws Exception {
-        Pair<User, UserDetail> userInfo   = getUser();
-        Pair<Boolean, String>  saveResult = userService.saveUser(userInfo.getKey(), userInfo.getValue());
+        UserInfo              userInfo   = getUser();
+        Pair<Boolean, String> saveResult = userService.saveUser(userInfo);
         System.out.println(saveResult);
     }
 
@@ -60,7 +62,7 @@ public class TestController {
         System.out.println(userList);
     }
 
-    public Pair<User, UserDetail> getUser() {
+    public UserInfo getUser() {
         String name = "A·Da";
         User   user = new User();
         user.setUserName(name);
@@ -76,6 +78,9 @@ public class TestController {
         userDetail.setPhone("15200000000");
         userDetail.setCreatedBy("admin");
         userDetail.setUpdatedBy("admin");
-        return Pair.of(user, userDetail);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUser(user);
+        userInfo.setUserDetail(userDetail);
+        return userInfo;
     }
 }
