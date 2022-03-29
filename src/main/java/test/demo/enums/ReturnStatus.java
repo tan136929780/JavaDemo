@@ -9,7 +9,8 @@ public enum ReturnStatus {
      * 请求返回状态
      */
     SUCCESS(1, "成功"),
-    FAILED(0, "失败");
+    FAILED(0, "失败"),
+    CONDITION_ERROR(10000, "查询条件无效");
 
     private int code;
     private String message;

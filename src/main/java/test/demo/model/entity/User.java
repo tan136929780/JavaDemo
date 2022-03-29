@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 
 @Table(indexes = {
         @Index(name = "userName", columnList = "userName"),
-        @Index(name = "email", columnList = "email", unique = true),
+        @Index(name = "email", columnList = "email"),
 })
 @TableName(value = "user")
 @Data

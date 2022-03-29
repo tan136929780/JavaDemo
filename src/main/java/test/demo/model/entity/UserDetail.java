@@ -34,6 +34,7 @@ public class UserDetail extends BaseEntity {
     private String phone;
 
     @Length(max = 20)
+    @NotBlank
     private String postCode;
 
     @Length(max = 500)

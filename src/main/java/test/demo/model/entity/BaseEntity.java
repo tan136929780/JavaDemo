@@ -15,12 +15,10 @@ public abstract class BaseEntity implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private String createdTime;
 
-    @NotBlank
     private String createdBy;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updatedTime;
 
-    @NotBlank
     private String updatedBy;
 }

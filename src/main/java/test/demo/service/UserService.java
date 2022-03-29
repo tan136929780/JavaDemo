@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,12 +13,14 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import test.demo.component.CommonValidator;
 import test.demo.component.RedisOperater;
 import test.demo.enums.EntityStatus;
+import test.demo.enums.Gender;
 import test.demo.model.PageResult;
 import test.demo.model.entity.User;
 import test.demo.model.entity.UserDetail;
 import test.demo.model.mapper.UserDetailMapper;
 import test.demo.model.mapper.UserMapper;
 import test.demo.utils.JacksonUtil;
+
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.Map;
@@ -43,13 +46,14 @@ public class UserService {
     public Pair<Boolean, String> saveUser(User user, UserDetail userDetail) throws Exception {
         Pair<Boolean, String> validateResult = commonValidator.validateUser(user);
         if (validateResult.getKey()) {
-            return Pair.of(false, validateResult.getValue() + ": validate failed!");
+            return Pair.of(false, User.class + ":" + validateResult.getValue() + ": validate failed!");
         }
         String cacheKey    = this.PERFIX + user.getEmail();
         String getIfAbsent = redisOperater.get(cacheKey);
         if (getIfAbsent == null) {
             QueryWrapper<User> qw = new QueryWrapper<>();
             qw.eq("email", user.getEmail());
+            qw.eq("status", EntityStatus.STATUS_ACTIVE.getValue());
             User persistentUser = userMapper.selectOne(qw);
             if (persistentUser == null) {
                 try {
@@ -57,19 +61,23 @@ public class UserService {
                     int state = userMapper.insert(user);
                     if (state > 0) {
                         userDetail.setUserId(user.getId());
+                        userDetail.setStatus(EntityStatus.STATUS_ACTIVE);
+                        validateResult = commonValidator.validateUserDetail(userDetail);
+                        if (validateResult.getKey()) {
+                            throw new Exception(UserDetail.class + ":" + validateResult.getValue() + ": validate failed!");
+                        }
                         state = userDetailMapper.insert(userDetail);
                         redisOperater.delate(cacheKey);
                         if (state > 0) {
                             return Pair.of(true, String.valueOf(user.getId()));
                         }
-                        return Pair.of(false, "Add UserInfo failed!");
+                        throw new Exception("Add UserInfo failed!");
                     }
                 } catch (Exception exception) {
                     log.error(exception.getMessage());
-                    System.out.println(exception.getMessage());
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                    return Pair.of(false, exception.getMessage());
                 }
-                return Pair.of(false, "Add User failed!");
             }
             return Pair.of(false, "User already exist!");
         }

@@ -73,7 +73,6 @@ public class TestController {
         //-----
         UserDetail userDetail = new UserDetail();
         userDetail.setAddress("北京市 朝阳区 酒仙桥 58同城");
-        userDetail.setStatus(EntityStatus.STATUS_ACTIVE);
         userDetail.setPhone("15200000000");
         userDetail.setCreatedBy("admin");
         userDetail.setUpdatedBy("admin");

@@ -8,7 +8,8 @@
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <!--格式化输出（配色）：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
             <pattern>
-                %yellow(%d{yyyy-MM-dd HH:mm:ss}) %red([%thread]) %highlight(%-5level) %cyan(%logger{50}) [%method : %line] -
+                %yellow(%d{yyyy-MM-dd HH:mm:ss}) %red([%thread]) %highlight(%-5level) %cyan(%logger{50}) [%method :
+                %line] -
                 %magenta(%msg) %n
             </pattern>
             <charset>UTF-8</charset>
@@ -80,7 +81,7 @@
     </appender>
 
     <appender name="exceptionLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${logging.file.path}/exception.log</file>
+<!--        <file>${logging.file.path}/exception.log</file>-->
         <!-- 文件路径 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 文件名称 -->
@@ -156,8 +157,8 @@
     </logger>
 
     <logger name="exceptionLog" additivity="false">
-        <appender-ref ref="exceptionLog" />
-        <appender-ref ref="consoleLog" />
+        <appender-ref ref="exceptionLog"/>
+        <appender-ref ref="consoleLog"/>
     </logger>
     <root level="info">
         <appender-ref ref="consoleLog"/>
