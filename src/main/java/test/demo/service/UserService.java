@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,6 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import test.demo.component.CommonValidator;
 import test.demo.component.RedisOperater;
 import test.demo.enums.EntityStatus;
-import test.demo.enums.Gender;
 import test.demo.model.PageResult;
 import test.demo.model.entity.User;
 import test.demo.model.entity.UserDetail;
@@ -64,7 +62,7 @@ public class UserService {
                     int state = userMapper.insert(user);
                     if (state > 0) {
                         userDetail.setUserId(user.getId());
-                        userDetail.setStatus(EntityStatus.STATUS_ACTIVE);
+                        userDetail.setStatus(EntityStatus.STATUS_ACTIVE.getValue());
                         validateResult = commonValidator.validateUserDetail(userDetail);
                         if (validateResult.getKey()) {
                             throw new Exception(UserDetail.class + ":" + validateResult.getValue() + ": validate failed!");

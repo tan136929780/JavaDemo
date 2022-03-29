@@ -36,6 +36,20 @@ public class UserController {
         return ResponseUtil.success(data);
     }
 
+    @PostMapping("/update")
+    public ReturnResult update(@RequestBody UserInfo userInfo) {
+        Long id = userInfo.getUser().getId();
+        if (id <= 0) {
+            return ResponseUtil.withMessage(ReturnStatus.CONDITION_ERROR.getCode(), ReturnStatus.CONDITION_ERROR.getMessage(), "ID 无效");
+        }
+        Pair<Boolean, String> userResult = userService.updateUser(id, userInfo);
+        if (!userResult.getKey()) {
+            return ResponseUtil.failed(userResult.getValue());
+        }
+        Map<String, String> data = Collections.singletonMap("id", userResult.getValue());
+        return ResponseUtil.success(data);
+    }
+
     @PostMapping("/detail")
     public ReturnResult detail(@RequestBody Map<String, Long> params) {
         if (params.isEmpty() || params.get("id") <= 0) {

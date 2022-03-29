@@ -6,12 +6,11 @@ import lombok.Data;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
-import test.demo.enums.EntityStatus;
-import test.demo.enums.Gender;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 
 @Table(indexes = {
@@ -21,7 +20,8 @@ import javax.validation.constraints.NotNull;
 @TableName(value = "user")
 @Data
 @ToString
-public class User extends BaseEntity {
+@Entity
+public class User implements Serializable {
     @Id
     @TableId(type = IdType.AUTO)
     @Range
@@ -33,7 +33,8 @@ public class User extends BaseEntity {
     private String userName;
 
     @NotNull
-    private Gender gender;
+    @Range(max = 1)
+    private Integer gender;
 
     @Range(min = 1, max = 150)
     @NotNull
@@ -44,5 +45,16 @@ public class User extends BaseEntity {
     @TableField(fill = FieldFill.INSERT)
 
     @NotNull
-    private EntityStatus status;
+    @Range(max = 1)
+    private Integer status;
+
+    @TableField(fill = FieldFill.INSERT)
+    private String createdTime;
+
+    private String createdBy;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private String updatedTime;
+
+    private String updatedBy;
 }

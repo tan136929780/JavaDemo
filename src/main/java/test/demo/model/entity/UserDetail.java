@@ -5,11 +5,11 @@ import lombok.Data;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
-import test.demo.enums.EntityStatus;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Table(indexes = {
         @Index(name = "userId", columnList = "userId"),
@@ -17,7 +17,8 @@ import javax.validation.constraints.NotNull;
 @TableName(value = "user_detail")
 @Data
 @ToString
-public class UserDetail extends BaseEntity {
+@Entity
+public class UserDetail implements Serializable {
     @Id
     @TableId(type = IdType.AUTO)
     @Range
@@ -28,7 +29,8 @@ public class UserDetail extends BaseEntity {
     private Long userId;
 
     @NotNull
-    private EntityStatus status;
+    @Range(max = 1)
+    private Integer status;
 
     @NotNull
     @Length(max = 50)
@@ -41,4 +43,14 @@ public class UserDetail extends BaseEntity {
     @Length(max = 500)
     @NotBlank
     private String address;
+
+    @TableField(fill = FieldFill.INSERT)
+    private String createdTime;
+
+    private String createdBy;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private String updatedTime;
+
+    private String updatedBy;
 }

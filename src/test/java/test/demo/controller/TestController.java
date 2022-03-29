@@ -67,11 +67,11 @@ public class TestController {
         User   user = new User();
         user.setUserName(name);
         user.setAge(30);
-        user.setGender(Gender.GENDER_MALE);
+        user.setGender(Gender.GENDER_MALE.getValue());
         user.setEmail(StringUtils.lowerCase(user.getUserName()) + "@58.com");
         user.setCreatedBy("admin");
         user.setUpdatedBy("admin");
-        user.setStatus(EntityStatus.STATUS_ACTIVE);
+        user.setStatus(EntityStatus.STATUS_ACTIVE.getValue());
         //-----
         UserDetail userDetail = new UserDetail();
         userDetail.setAddress("北京市 朝阳区 酒仙桥 58同城");
