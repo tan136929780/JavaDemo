@@ -47,7 +47,7 @@ public class UserService {
         UserDetail            userDetail     = userInfo.getUserDetail();
         Pair<Boolean, String> validateResult = commonValidator.validateUser(user);
         if (validateResult.getKey()) {
-            return Pair.of(false, User.class + ":" + validateResult.getValue() + ": validate failed!");
+            return Pair.of(false, User.class + ":" + validateResult.getValue() + ":验证失败!");
         }
         String cacheKey    = this.PERFIX + user.getEmail();
         String getIfAbsent = redisOperater.get(cacheKey);
@@ -65,14 +65,14 @@ public class UserService {
                         userDetail.setStatus(EntityStatus.STATUS_ACTIVE.getValue());
                         validateResult = commonValidator.validateUserDetail(userDetail);
                         if (validateResult.getKey()) {
-                            throw new Exception(UserDetail.class + ":" + validateResult.getValue() + ": validate failed!");
+                            throw new Exception(UserDetail.class + ":" + validateResult.getValue() + ":验证失败！");
                         }
                         state = userDetailMapper.insert(userDetail);
                         redisOperater.delate(cacheKey);
                         if (state > 0) {
                             return Pair.of(true, String.valueOf(user.getId()));
                         }
-                        throw new Exception("Add UserInfo failed!");
+                        throw new Exception("添加用户信息失败！");
                     }
                 } catch (Exception exception) {
                     log.error(exception.getMessage());
@@ -80,9 +80,9 @@ public class UserService {
                     return Pair.of(false, exception.getMessage());
                 }
             }
-            return Pair.of(false, "User already exist!");
+            return Pair.of(false, "用户已经存在！");
         }
-        return Pair.of(false, "Operation Error!");
+        return Pair.of(false, "错误操作！");
     }
 
     public Map<String, Object> userDetail(Long id, Integer status) {
@@ -122,17 +122,21 @@ public class UserService {
         UserDetail            userDetail     = userInfo.getUserDetail();
         Pair<Boolean, String> validateResult = commonValidator.validateUser(user);
         if (validateResult.getKey()) {
-            return Pair.of(false, User.class + ":" + validateResult.getValue() + ": validate failed!");
+            return Pair.of(false, User.class + ":" + validateResult.getValue() + ":验证失败！");
         }
         validateResult = commonValidator.validateUserDetail(userDetail);
         if (validateResult.getKey()) {
-            return Pair.of(false, UserDetail.class + ":" + validateResult.getValue() + ": validate failed!");
+            return Pair.of(false, UserDetail.class + ":" + validateResult.getValue() + ":验证失败！");
         }
-        return Pair.of(true, "修改成功");
+        return Pair.of(true, "修改成功！");
     }
 
     public Pair<Boolean, String> deleteUser(Long id) {
+        Map<String, String> userInfo = userMapper.selectUserDetail(id, EntityStatus.STATUS_ACTIVE.getValue());
+        if (userInfo == null || userInfo.isEmpty()) {
+            return Pair.of(false, "用户不存在！");
+        }
         Integer res = userMapper.deleteUserInfo(id);
-        return Pair.of(res > 0, res > 0 ? "删除成功" : "删除失败");
+        return Pair.of(res > 0, res > 0 ? "删除成功！" : "删除失败！");
     }
 }

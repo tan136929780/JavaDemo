@@ -52,7 +52,7 @@ public class UserController {
 
     @PostMapping("/detail")
     public ReturnResult detail(@RequestBody Map<String, Long> params) {
-        if (params.isEmpty() || params.get("id") <= 0) {
+        if (params.isEmpty() || !params.containsKey("id") || params.get("id") <= 0) {
             return ResponseUtil.withMessage(ReturnStatus.CONDITION_ERROR.getCode(), ReturnStatus.CONDITION_ERROR.getMessage(), null);
         }
         Map<String, Object> user = userService.userDetail(params.get("id"), EntityStatus.STATUS_ACTIVE.getValue());
@@ -61,19 +61,21 @@ public class UserController {
 
     @PostMapping("/list")
     public ReturnResult list(@RequestBody Map<String, Long> params) {
-        if (params.isEmpty() || params.get("currentPage") <= 0 || params.get("pageSize") <= 0) {
+        if (params.isEmpty() || !params.containsKey("currentPage") || params.get("currentPage") <= 0) {
             return ResponseUtil.withMessage(ReturnStatus.CONDITION_ERROR.getCode(), ReturnStatus.CONDITION_ERROR.getMessage(), null);
         }
         PageResult pageResult = new PageResult();
         pageResult.setCurrentPage(params.get("currentPage"));
-        pageResult.setPageSize(params.get("pageSize"));
+        if (params.containsKey("pageSize")) {
+            pageResult.setPageSize(params.get("pageSize"));
+        }
         PageResult userList = userService.getUserList(pageResult);
         return ResponseUtil.success(userList);
     }
 
     @PostMapping("/delete")
     public ReturnResult delete(@RequestBody Map<String, Long> params) {
-        if (params.isEmpty() || params.get("id") <= 0) {
+        if (params.isEmpty() || !params.containsKey("id") || params.get("id") <= 0) {
             return ResponseUtil.withMessage(ReturnStatus.CONDITION_ERROR.getCode(), ReturnStatus.CONDITION_ERROR.getMessage(), null);
         }
         Pair<Boolean, String> userResult = userService.deleteUser(params.get("id"));
