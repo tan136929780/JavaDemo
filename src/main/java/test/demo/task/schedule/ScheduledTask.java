@@ -1,4 +1,4 @@
-//package test.demo.task.scheduled;
+//package test.demo.task.schedule;
 //
 //import org.springframework.scheduling.annotation.Async;
 //import org.springframework.scheduling.annotation.EnableAsync;
