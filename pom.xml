@@ -81,6 +81,7 @@
             <artifactId>guava</artifactId>
             <version>31.0.1-jre</version>
         </dependency>
+        <!-- 重试 -->
         <dependency>
             <groupId>com.github.rholder</groupId>
             <artifactId>guava-retrying</artifactId>
@@ -91,6 +92,11 @@
                     <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <!-- 定时任务 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
     </dependencies>
 
