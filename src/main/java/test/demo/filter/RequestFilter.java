@@ -21,6 +21,6 @@ public class RequestFilter implements Filter {
         HttpServletRequest request = new HttpServletRequestWrapper((HttpServletRequest)servletRequest);
         logger.info("Request:{}", JacksonUtil.toJSONString(request.getParameterMap()));
         filterChain.doFilter(request, servletResponse);
-        logger.info("Response:{}", "TODO");
+        logger.info("Response:{}", "");
     }
 }

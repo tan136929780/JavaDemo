@@ -17,7 +17,8 @@
     </appender>
 
     <!--根据日志级别分离日志，分别输出到不同的文件-->
-    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="infoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.file.path}/infoLog.log</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <onMatch>DENY</onMatch>
@@ -32,7 +33,7 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--按时间保存日志 修改格式可以按小时、按天、月来保存-->
-            <fileNamePattern>${logging.file.path}/info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${logging.file.path}/infoLog.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!--保存时长-->
             <MaxHistory>1</MaxHistory>
             <!--文件大小-->
@@ -40,7 +41,8 @@
         </rollingPolicy>
     </appender>
 
-    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="errorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.file.path}/errorLog.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
         </filter>
@@ -52,12 +54,13 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
-            <fileNamePattern>${logging.file.path}/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${logging.file.path}/errorLog.%d{yyyy-MM-dd}.log</fileNamePattern>
             <MaxHistory>1</MaxHistory>
         </rollingPolicy>
     </appender>
 
     <appender name="requestLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.file.path}/requestLog.log</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <onMatch>DENY</onMatch>
@@ -72,7 +75,7 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--按时间保存日志 修改格式可以按小时、按天、月来保存-->
-            <fileNamePattern>${logging.file.path}/request.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${logging.file.path}/requestLog.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!--保存时长-->
             <MaxHistory>1</MaxHistory>
             <!--文件大小-->
@@ -81,11 +84,11 @@
     </appender>
 
     <appender name="exceptionLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
-<!--        <file>${logging.file.path}/exception.log</file>-->
+        <file>${logging.file.path}/exceptionLog.log</file>
         <!-- 文件路径 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 文件名称 -->
-            <FileNamePattern>${logging.file.path}/exception.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>${logging.file.path}/exceptionLog.%d{yyyy-MM-dd}.log</FileNamePattern>
             <!--保存时长-->
             <MaxHistory>1</MaxHistory>
             <!--文件大小-->
@@ -98,6 +101,7 @@
     </appender>
 
     <appender name="commonLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.file.path}/commonLog.log</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <onMatch>DENY</onMatch>
@@ -121,6 +125,7 @@
     </appender>
 
     <appender name="methodLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.file.path}/methodLog.log</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <onMatch>DENY</onMatch>
@@ -162,8 +167,8 @@
     </logger>
     <root level="info">
         <appender-ref ref="consoleLog"/>
-        <appender-ref ref="fileInfoLog"/>
-        <appender-ref ref="fileErrorLog"/>
+        <appender-ref ref="infoLog"/>
+        <appender-ref ref="errorLog"/>
     </root>
 
 </configuration>
