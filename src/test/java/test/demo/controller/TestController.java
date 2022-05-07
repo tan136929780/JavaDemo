@@ -76,6 +76,7 @@ public class TestController {
         UserDetail userDetail = new UserDetail();
         userDetail.setAddress("北京市 朝阳区 酒仙桥 58同城");
         userDetail.setPhone("15200000000");
+        userDetail.setPostCode("000001");
         userDetail.setCreatedBy("admin");
         userDetail.setUpdatedBy("admin");
         UserInfo userInfo = new UserInfo();
