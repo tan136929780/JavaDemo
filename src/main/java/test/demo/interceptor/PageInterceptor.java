@@ -1,4 +1,4 @@
-package test.demo.config;
+package test.demo.interceptor;
 
 
 import com.baomidou.mybatisplus.annotation.DbType;
@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Mybatis 分页配置类
+ * Mybatis分页实现原理: 拦截器
  */
 @Configuration
-public class PageConfiguration {
+public class PageInterceptor {
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
