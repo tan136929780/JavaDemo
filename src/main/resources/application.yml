@@ -64,6 +64,6 @@ logging:
     com:
       demo: DEBUG
 ## grpc 配置
-#grpc:
-#  server:
-#    port: 8881
+grpc:
+  server:
+    port: 8881
