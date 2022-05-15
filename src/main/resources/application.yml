@@ -11,7 +11,7 @@ spring:
 #      nacos:
 #        discovery:
 #          server-addr: 127.0.0.1:8848
-#          namespace: c4b22db0-2d02-4c27-995f-96acaf4bd9934
+#          namespace: c4b22db0-2d02-4c27-995f-96acaf4bd993
   redis:
     host: localhost
     port: 6379
