@@ -6,7 +6,7 @@ server:
 # redisConfig
 spring:
   application:
-    name: java.user.service
+    name: java.service
 #    cloud:
 #      nacos:
 #        discovery:
@@ -65,13 +65,14 @@ logging:
       demo: DEBUG
 ## grpc 配置
 grpc:
-  client:
-    go:
-      micro:
-        user:
-          address: static://127.0.0.1:8802
-          enableKeepAlive: true
-          keepAliveWithoutCalls: true
-          negotiationType: plaintext
+#  client:
+#    go:
+#      micro:
+#        user:
+#          address: static://127.0.0.1:8802
+#          enableKeepAlive: true
+#          keepAliveWithoutCalls: true
+#          negotiationType: plaintext
   server:
-    port: 8101
+    port: 8100
+    address: 127.0.0.1

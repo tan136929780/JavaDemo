@@ -18,6 +18,7 @@
         <spring.boot.version>2.6.4</spring.boot.version>
         <gprc.version>2.13.1.RELEASE</gprc.version>
         <proto.version>1.42.2</proto.version>
+        <nacos.version>0.2.1</nacos.version>
     </properties>
     <dependencies>
         <dependency>
@@ -155,17 +156,17 @@
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>nacos-config-spring-boot-actuator</artifactId>
-            <version>0.2.1</version>
+            <version>${nacos.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>nacos-config-spring-boot-starter</artifactId>
-            <version>0.2.1</version>
+            <version>${nacos.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>nacos-discovery-spring-boot-starter</artifactId>
-            <version>0.2.1</version>
+            <version>${nacos.version}</version>
         </dependency>
     </dependencies>
 

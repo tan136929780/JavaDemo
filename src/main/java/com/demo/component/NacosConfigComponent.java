@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @NacosPropertySource(dataId = "java", autoRefreshed = true)
 @Getter
-public class NacosComponent {
+public class NacosConfigComponent {
     @NacosValue(value = "${env:dev}", autoRefreshed = true)
     private String env;
 
