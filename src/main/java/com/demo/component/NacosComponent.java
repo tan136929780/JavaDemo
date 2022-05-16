@@ -6,8 +6,6 @@ import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-
 @Component
 @NacosPropertySource(dataId = "java", autoRefreshed = true)
 @Getter
