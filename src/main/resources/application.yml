@@ -74,5 +74,5 @@ grpc:
 #          keepAliveWithoutCalls: true
 #          negotiationType: plaintext
   server:
-    port: 8100
+    port: 8101
     address: 127.0.0.1
