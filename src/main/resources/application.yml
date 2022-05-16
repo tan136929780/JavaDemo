@@ -46,13 +46,13 @@ mybatis-plus:
     map-underscore-to-camel-case: true
   type-enums-package: com.demo.enums
 # nacos
-#nacos:
-#  #  config:
-#  #    server-addr: 127.0.0.1:8848
-#  #    namespace: c4b22db0-2d02-4c27-995f-96acaf4bd993
-#  discovery:
-#    server-addr: 127.0.0.1:8848
-#    namespace: c4b22db0-2d02-4c27-995f-96acaf4bd993
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    namespace: c4b22db0-2d02-4c27-995f-96acaf4bd993
+  discovery:
+    server-addr: 127.0.0.1:8848
+    namespace: c4b22db0-2d02-4c27-995f-96acaf4bd993
 # logConfig
 logging:
   file:
@@ -65,5 +65,13 @@ logging:
       demo: DEBUG
 ## grpc 配置
 grpc:
+  client:
+    go:
+      micro:
+        user:
+          address: static://127.0.0.1:8802
+          enableKeepAlive: true
+          keepAliveWithoutCalls: true
+          negotiationType: plaintext
   server:
     port: 8881

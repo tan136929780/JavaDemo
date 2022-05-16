@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import com.demo.component.CommonValidator;
-import com.demo.component.RedisOperater;
+import com.demo.component.RedisComponent;
 import com.demo.model.PageResult;
 import com.demo.model.entity.User;
 import com.demo.model.entity.UserDetail;
@@ -28,7 +28,7 @@ import java.util.Map;
 @Slf4j(topic = "exceptionLog")
 public class UserService {
     @Autowired
-    RedisOperater redisOperater;
+    RedisComponent redisComponent;
 
     @Resource
     private UserMapper userMapper;
@@ -50,7 +50,7 @@ public class UserService {
             return Pair.of(false, User.class + ":" + validateResult.getValue() + ":验证失败!");
         }
         String cacheKey    = this.PERFIX + user.getEmail();
-        String getIfAbsent = redisOperater.get(cacheKey);
+        String getIfAbsent = redisComponent.get(cacheKey);
         if (getIfAbsent == null) {
             QueryWrapper<User> qw = new QueryWrapper<>();
             qw.eq("email", user.getEmail());
@@ -58,7 +58,7 @@ public class UserService {
             User persistentUser = userMapper.selectOne(qw);
             if (persistentUser == null) {
                 try {
-                    redisOperater.setIfAbsent(cacheKey);
+                    redisComponent.setIfAbsent(cacheKey);
                     int state = userMapper.insert(user);
                     if (state > 0) {
                         userDetail.setUserId(user.getId());
@@ -68,7 +68,7 @@ public class UserService {
                             throw new Exception(UserDetail.class + ":" + validateResult.getValue() + ":验证失败！");
                         }
                         state = userDetailMapper.insert(userDetail);
-                        redisOperater.delate(cacheKey);
+                        redisComponent.delate(cacheKey);
                         if (state > 0) {
                             return Pair.of(true, String.valueOf(user.getId()));
                         }
@@ -88,16 +88,16 @@ public class UserService {
     public Map<String, Object> userDetail(Long id, Integer status) {
         Map<String, Object> user      = Collections.emptyMap();
         String              cacheKey  = this.PERFIX + id;
-        String              userCache = redisOperater.get(cacheKey);
+        String              userCache = redisComponent.get(cacheKey);
         if (userCache != null) {
             user = JacksonUtil.toMap(userCache);
         }
         if (user.isEmpty()) {
-            redisOperater.set(cacheKey, JacksonUtil.toJSONString(Collections.emptyMap()));
+            redisComponent.set(cacheKey, JacksonUtil.toJSONString(Collections.emptyMap()));
             Map<String, String> userInfo = userMapper.selectUserDetail(id, status);
             userCache = JacksonUtil.toJSONString(userInfo);
             if (userInfo != null) {
-                redisOperater.setWithExpire(cacheKey, userCache, 1000);
+                redisComponent.setWithExpire(cacheKey, userCache, 1000);
             }
             user = JacksonUtil.toMap(userCache);
         }

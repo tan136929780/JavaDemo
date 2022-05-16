@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 
 @Component
-public class RedisOperater {
+public class RedisComponent {
     @Resource
     StringRedisTemplate stringValueRedisTemplate;
 
