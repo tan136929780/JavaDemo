@@ -13,9 +13,8 @@ public class GrpcTest {
     HelloService helloService;
 
     @Test
-    public void test() throws InvalidProtocolBufferException {
+    public void test() {
         HelloResponse helloResponse = helloService.hello("Lyn");
-//        com.google.protobuf.util.JsonFormat.printer().includingDefaultValueFields().print(helloResponse);
         System.out.println(helloResponse);
     }
 }
