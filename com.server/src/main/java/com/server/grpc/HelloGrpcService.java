@@ -18,11 +18,10 @@ public class HelloGrpcService extends HelloGrpc.HelloImplBase {
         try {
             log.info(request.toString());
             helloResponse = HelloResponse.newBuilder().setGreeting("hello " + request.getName()).build();
-            responseObserver.onNext(helloResponse);
         } catch (Exception e) {
             log.error(request.toString());
-            helloResponse = HelloResponse.newBuilder().setGreeting("exception hello " + request.getName()).build();
         } finally {
+            System.out.println(1111);
             responseObserver.onNext(helloResponse);
             responseObserver.onCompleted();
         }

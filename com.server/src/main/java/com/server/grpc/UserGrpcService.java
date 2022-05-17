@@ -18,7 +18,7 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
             log.info(JacksonUtil.toJSONString(request));
             responseResult = ResponseResult.newBuilder().setCode(200).setMsg("user grpc service").build();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            log.error(request.toString());
         } finally {
             responseObserver.onNext(responseResult);
             responseObserver.onCompleted();
