@@ -21,7 +21,6 @@ public class HelloGrpcService extends HelloGrpc.HelloImplBase {
         } catch (Exception e) {
             log.error(request.toString());
         } finally {
-            System.out.println(1111);
             responseObserver.onNext(helloResponse);
             responseObserver.onCompleted();
         }
