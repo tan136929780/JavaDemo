@@ -65,12 +65,6 @@ logging:
       client: DEBUG
 ## grpc 配置
 grpc:
-  client:
-    java-client:
-      address: static://127.0.0.1:8101
-      enableKeepAlive: true
-      keepAliveWithoutCalls: true
-      negotiationType: plaintext
   server:
     port: 8103
     address: 127.0.0.1
