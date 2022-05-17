@@ -1,8 +1,8 @@
 package com.server.grpc;
 
-import com.client.contract.user.ResponseResult;
-import com.client.contract.user.UserRequest;
-import com.client.contract.user.UserServiceGrpc;
+import com.server.contract.user.ResponseResult;
+import com.server.contract.user.UserRequest;
+import com.server.contract.user.UserServiceGrpc;
 import com.server.utils.JacksonUtil;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;

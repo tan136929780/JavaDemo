@@ -1,9 +1,9 @@
 package com.server.grpc;
 
 
-import com.client.contract.hello.HelloRequest;
-import com.client.contract.hello.HelloResponse;
-import com.client.contract.hello.HelloGrpc;
+import com.server.contract.hello.HelloRequest;
+import com.server.contract.hello.HelloResponse;
+import com.server.contract.hello.HelloGrpc;
 import com.server.utils.JacksonUtil;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
