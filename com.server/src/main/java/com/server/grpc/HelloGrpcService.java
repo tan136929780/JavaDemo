@@ -14,8 +14,17 @@ import net.devh.boot.grpc.server.service.GrpcService;
 public class HelloGrpcService extends HelloGrpc.HelloImplBase {
     @Override
     public void hello(HelloRequest request, StreamObserver<HelloResponse> responseObserver) {
-        log.info(JacksonUtil.toJSONString(request));
-        HelloResponse.newBuilder().setGreeting("hello" + request.getName()).build();
-        responseObserver.onCompleted();
+        HelloResponse helloResponse = null;
+        try {
+            log.info(request.toString());
+            helloResponse = HelloResponse.newBuilder().setGreeting("hello " + request.getName()).build();
+            responseObserver.onNext(helloResponse);
+        } catch (Exception e) {
+            log.error(request.toString());
+            helloResponse = HelloResponse.newBuilder().setGreeting("exception hello " + request.getName()).build();
+        } finally {
+            responseObserver.onNext(helloResponse);
+            responseObserver.onCompleted();
+        }
     }
 }

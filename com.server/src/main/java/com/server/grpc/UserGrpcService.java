@@ -13,8 +13,15 @@ import net.devh.boot.grpc.server.service.GrpcService;
 public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
     @Override
     public void getUserInfo(UserRequest request, StreamObserver<ResponseResult> responseObserver) {
-        log.info(JacksonUtil.toJSONString(request));
-        ResponseResult.newBuilder().setCode(200).setMsg("user grpc service").build();
-        responseObserver.onCompleted();
+        ResponseResult responseResult = null;
+        try {
+            log.info(JacksonUtil.toJSONString(request));
+            responseResult = ResponseResult.newBuilder().setCode(200).setMsg("user grpc service").build();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            responseObserver.onNext(responseResult);
+            responseObserver.onCompleted();
+        }
     }
 }

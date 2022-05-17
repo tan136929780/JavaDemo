@@ -1,5 +1,8 @@
 package com.client.grpc;
 
+import com.alibaba.nacos.api.annotation.NacosInjected;
+import com.alibaba.nacos.api.exception.NacosException;
+import com.alibaba.nacos.api.naming.NamingService;
 import com.client.contract.hello.HelloResponse;
 import com.client.service.HelloService;
 import org.junit.jupiter.api.Test;

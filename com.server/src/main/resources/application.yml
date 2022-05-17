@@ -51,7 +51,7 @@ nacos:
 # logConfig
 logging:
   file:
-    path: ./log
+    path: ./com.server/log
   level:
     org:
     springframework:
