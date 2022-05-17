@@ -62,4 +62,3 @@ logging:
 grpc:
   server:
     port: 8101
-    address: 127.0.0.1
