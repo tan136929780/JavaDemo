@@ -1,4 +1,4 @@
-package com.demo;
+package com.client;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -6,11 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@MapperScan("com.demo.model.mapper")
+@MapperScan("com.client.model.mapper")
 @EnableTransactionManagement
-public class DemoApplication {
+public class ClientApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(ClientApplication.class, args);
     }
 }
