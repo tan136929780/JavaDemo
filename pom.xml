@@ -6,6 +6,7 @@
     <modules>
         <module>com.client</module>
         <module>com.server</module>
+        <module>com.protocol</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
