@@ -17,7 +17,7 @@ import java.sql.SQLException;
 @Aspect
 @Slf4j(topic = "exceptionLog")
 public class ExceptionAop {
-    @Pointcut("execution(* com.client.controller.*.*(..))")
+    @Pointcut("execution(* com.server.controller.*.*(..))")
     public void pointCut() {
     }
 
