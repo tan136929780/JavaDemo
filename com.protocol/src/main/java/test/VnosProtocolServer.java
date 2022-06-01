@@ -113,8 +113,9 @@ public class VnosProtocolServer {
                         }
                     } else {
                         clientChannel = (SocketChannel) currentKey.channel();
-                        if (currentKey.isReadable())
+                        if (currentKey.isReadable()) {
                             writeResponse();
+                        }
                     }
                 } catch (IOException e) {
                     if (clientChannel != null && clientChannel.isOpen())
@@ -166,9 +167,9 @@ public class VnosProtocolServer {
         } else {
             // 获取请求参数值
             String queryValueString = request.substring(start + REQUEST_PARAM_MARK.length());
-            if (StringUtils.isNullOrBlank(queryValueString))
+            if (StringUtils.isNullOrBlank(queryValueString)) {
                 clientChannel.write(ByteBuffer.wrap(SystemUtils.formatSystemProperties().getBytes()));
-            else {
+            } else {
                 int index = queryValueString.indexOf("&");
                 if (index > -1)
                     /*
