@@ -1,4 +1,4 @@
-package com.libtest.util;
+package com.libgolang.util;
 
 import com.sun.jna.Structure;
 

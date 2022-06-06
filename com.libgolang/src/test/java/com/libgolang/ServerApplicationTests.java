@@ -1,4 +1,4 @@
-package com.libtest;
+package com.libgolang;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

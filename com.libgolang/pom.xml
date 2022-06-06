@@ -10,6 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>com.libgolang</artifactId>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>net.java.dev.jna</groupId>
@@ -17,6 +23,4 @@
             <version>4.5.2</version>
         </dependency>
     </dependencies>
-
-
 </project>
