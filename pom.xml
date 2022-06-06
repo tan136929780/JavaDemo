@@ -7,7 +7,7 @@
         <module>com.client</module>
         <module>com.server</module>
         <module>com.protocol</module>
-        <module>com.libtest</module>
+        <module>com.libgolang</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

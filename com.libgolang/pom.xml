@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>com.libtest</artifactId>
+    <artifactId>com.libgolang</artifactId>
     <dependencies>
         <dependency>
             <groupId>net.java.dev.jna</groupId>
