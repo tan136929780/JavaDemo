@@ -1,0 +1,24 @@
+# serverConfig
+server:
+  port: 8100
+  servlet:
+    context-path: /
+# redisConfig
+spring:
+  application:
+    name: java-service
+# logConfig
+logging:
+  file:
+    path: ./log
+  level:
+    org:
+    springframework:
+      context: DEBUG
+    com:
+      libtest: DEBUG
+## grpc 配置
+grpc:
+  server:
+    port: 8101
+    address: 127.0.0.1
