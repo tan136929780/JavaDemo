@@ -30,6 +30,8 @@ spring:
       maximum-pool-size: 10
   # jpa
   jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
     hibernate:
       ddl-auto: update
   #spring:jpa:show-sql=true
