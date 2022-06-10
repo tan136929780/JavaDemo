@@ -9,6 +9,8 @@ public interface Libvfile extends Library {
     Libvfile INSTANCE = Native.load("/Users/tanxianchen/coding/go/src/visionvera/vfile_client/libvfile.so", Libvfile.class);
 
     ServiceInfoResponse.ByValue ServiceInfo();
+
     Pointer Upload(Pointer in);
+
     Pointer Download(Pointer in);
 }

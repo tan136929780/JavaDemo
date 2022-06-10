@@ -19,11 +19,14 @@ public class ServiceInfoResponse extends Structure {
     protected List<String> getFieldOrder() {
         return Arrays.asList("Version", "Os", "Hostname", "AcceptProtocol");
     }
+
     public static class ByValue extends ServiceInfoResponse implements Structure.ByValue {
-        public ByValue() {}
+        public ByValue() {
+        }
     }
 
     public static class ByReference extends ServiceInfoResponse implements Structure.ByReference {
-        public ByReference() {}
+        public ByReference() {
+        }
     }
 }
