@@ -6,13 +6,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class HostInfo extends Structure {
-    public GoString host;
+    public String  host;
     public int port;
 
     public HostInfo() {
         super();
     }
-    public HostInfo(GoString host, int port) {
+    public HostInfo(String host, int port) {
         this.host = host;
         this.port = port;
     }

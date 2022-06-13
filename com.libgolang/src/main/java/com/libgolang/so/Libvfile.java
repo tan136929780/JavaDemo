@@ -7,7 +7,7 @@ import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 
 public interface Libvfile extends Library {
-    Libvfile INSTANCE = Native.load("/Users/tanxianchen/coding/go/src/visionvera/vfile_client/libvfile.so", Libvfile.class);
+    Libvfile INSTANCE = Native.load("/Users/tanxianchen/coding/go/src/file-service/vfile_client/libvfile.so", Libvfile.class);
 
     ServiceInfoResponse.ByValue ServiceInfo(ServiceInfoRequest serviceInfoRequest);
 

@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestLibController {
     @Test
     public void test() {
-        HostInfo hostInfo = new HostInfo( new GoString.ByValue("127.0.0.1"), 8200);
+        HostInfo hostInfo = new HostInfo( "127.0.0.1", 8200);
         ServiceInfoRequest serviceInfoRequest = new ServiceInfoRequest(hostInfo);
         ServiceInfoResponse serviceInfo = Libvfile.INSTANCE.ServiceInfo(serviceInfoRequest);
         System.out.println(serviceInfo);
