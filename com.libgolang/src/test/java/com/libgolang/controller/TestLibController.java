@@ -15,6 +15,10 @@ public class TestLibController {
         HostInfo hostInfo = new HostInfo( new GoString.ByValue("127.0.0.1"), 8200);
         ServiceInfoRequest serviceInfoRequest = new ServiceInfoRequest(hostInfo);
         ServiceInfoResponse serviceInfo = Libvfile.INSTANCE.ServiceInfo(serviceInfoRequest);
+        System.out.println(serviceInfo);
+        System.out.println(serviceInfo.Version);
+        System.out.println(serviceInfo.Os.str);
+        System.out.println(serviceInfo.Hostname.str);
         System.out.println(serviceInfo.AcceptProtocol.str);
     }
 }
