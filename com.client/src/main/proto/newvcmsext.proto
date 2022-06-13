@@ -1,0 +1,188 @@
+syntax = "proto3";
+package vnos.newvcmsext;
+option java_package = "com.client.vnos.newvcmsext";
+
+service InstanceExtService {
+
+  // 创建实例前置
+  rpc  BeforeCreateInstanceExt(BeforeCreateExtRequest) returns(CreateResult){};
+  // 删除
+  rpc  BeforeDeleteInstanceExt(BeforeDeleteExtRequest) returns(DeleteResult){};
+  // 更新
+  rpc  BeforeUpdateInstanceExt(BeforeUpdateExtRequest) returns (UpdateResult){};
+  // 查询
+  rpc  BeforeFindInstanceExt(BeforeInstanceFindRequest) returns (BeforeInstanceFindResponse){};
+  // 根据id查询
+  rpc  BeforeFindByIdInstanceExt(BeforeInstanceFindByIdRequest) returns (BeforeInstanceFindByIdResponse){};
+
+  // 创建实例后置
+  rpc AfterCreateInstanceExt(AfterCreateExtRequest) returns(Empty){};
+  // 删除
+  rpc AfterDeleteInstanceExt(AfterDeleteExtRequest) returns(Empty){};
+  // 更新
+  rpc AfterUpdateInstanceExt(AfterUpdateExtRequest) returns (Empty){};
+  // 查询
+  rpc AfterFindInstanceExt(AfterInstanceFindRequest) returns (Empty){};
+
+  rpc AfterFindByIdInstanceExt(AfterInstanceFindByIdRequest) returns (Empty){};
+
+}
+
+message AfterUpdateExtRequest{
+  // 模型标识
+  string identifier = 1;
+  // 实例的属性
+  map<string,string> values= 2;
+  //
+  string uid = 3;
+  // 更新的上下文
+  map<string,string> updateContext = 4;
+  // 函数返回值
+  map<string,string> result = 5;
+}
+
+message AfterDeleteExtRequest{
+  // 模型标识
+  string identify = 1;
+  // 批量删除id列表
+  repeated string ids = 2;
+  // 删除扩展上下文
+  map<string,string> delContext = 3;
+  //函数返回值
+  map<string,string> resultMap =4;
+}
+
+message AfterCreateExtRequest{
+  string identifier = 1;
+
+  map<string,string> data = 2;
+
+  string uid = 3;
+
+  map<string,string> createContext = 4;
+}
+
+message Empty{
+  // 无返回值
+}
+
+message AfterInstanceFindByIdRequest{
+  // 查询id
+  string uid = 1;
+  // 查询出的数据
+  string data = 2;
+  // 查询上下文
+  map<string,string> context = 3;
+}
+
+message AfterInstanceFindRequest {
+  // 标识
+  string identifier = 1;
+  // 当前页面
+  int32 page = 3;
+  // 页面大小
+  int32 page_size = 4;
+  // 排序
+  repeated Sorter sorters = 2;
+  // 查询扩展上下文
+  map<string,string> findAfterContext = 5;
+  // 查询数据
+  map<string,string> data = 6;
+  // 查询条件
+  map<string,string> condition = 7;
+}
+
+message Sorter {
+  enum OrderEnum{
+    ASC = 0;
+    DESC = 1;
+  }
+  // 属性标识
+  string propertyIdentifier = 1;
+  OrderEnum order = 2;
+}
+
+message BeforeUpdateExtRequest{
+  // 模型标识
+  string identifier = 1;
+  // 实例的属性
+  map<string,string> values = 2;
+  // uid
+  string uid = 3;
+  // 修改的上下文
+  map<string,string> updateContext = 4;
+}
+
+message BeforeCreateExtRequest{
+  // 模型标识
+  string identify = 1;
+  // 数据
+  map<string,string> data = 2;
+  // 扩展上下文
+  map<string,string> createContext = 3;
+
+}
+
+message BeforeDeleteExtRequest{
+  // 模型标识
+  string identify = 1;
+  // 批量删除id列表
+  repeated string ids = 2;
+  // 删除扩展上下文
+  map<string,string> delContext = 3;
+}
+
+message Result{
+  // 前置判断结果
+  // 修改范围内的数据
+  // 删除范围内的数据
+  map<string,string> resultMap = 1;
+}
+
+message DeleteResult{
+ bool result = 1;
+}
+
+message UpdateResult{
+  bool result = 1;
+}
+
+message CreateResult{
+  // 前置判断结果
+  bool flag = 1;
+}
+
+message BeforeInstanceFindRequest {
+  // 标识
+  string identifier = 1;
+  // 排序
+  repeated Sorter sorters = 2;
+  // 页面
+  int32 page = 3;
+  // 页面大小
+  int32 page_size = 4;
+  // 查询条件
+  map<string,string> condition = 5;
+  // 查询扩展上下文
+  map<string,string> findBeforeContext = 6;
+
+}
+
+message BeforeInstanceFindResponse{
+  // 前置返回值
+  map<string,string> result = 1;
+}
+
+message BeforeInstanceFindByIdRequest{
+  // 查询id
+  string uid = 1;
+  // repeated
+  repeated string identifiers = 2;
+  // 查询上下文
+  map<string,string> findByIdBeforeContext = 3;
+
+}
+
+message BeforeInstanceFindByIdResponse{
+  bool  result = 1;
+}
