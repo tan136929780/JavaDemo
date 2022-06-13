@@ -1,6 +1,5 @@
 package com.libgolang.controller;
 
-import com.libgolang.libStruct.GoString;
 import com.libgolang.libStruct.HostInfo;
 import com.libgolang.libStruct.ServiceInfoRequest;
 import com.libgolang.so.Libvfile;
@@ -16,9 +15,5 @@ public class TestLibController {
         ServiceInfoRequest serviceInfoRequest = new ServiceInfoRequest(hostInfo);
         ServiceInfoResponse serviceInfo = Libvfile.INSTANCE.ServiceInfo(serviceInfoRequest);
         System.out.println(serviceInfo);
-        System.out.println(serviceInfo.Version);
-        System.out.println(serviceInfo.Os.str);
-        System.out.println(serviceInfo.Hostname.str);
-        System.out.println(serviceInfo.AcceptProtocol.str);
     }
 }

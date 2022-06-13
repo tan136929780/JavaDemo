@@ -7,9 +7,9 @@ import java.util.List;
 
 public class ServiceInfoResponse extends Structure {
     public int Version;
-    public GoString Os;
-    public GoString Hostname;
-    public GoString AcceptProtocol;
+    public String  Os;
+    public String Hostname;
+    public String AcceptProtocol;
 
     public ServiceInfoResponse() {
         super();
