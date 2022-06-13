@@ -1,5 +1,8 @@
 package com.libgolang.controller;
 
+import com.libgolang.libStruct.GoString;
+import com.libgolang.libStruct.HostInfo;
+import com.libgolang.libStruct.ServiceInfoRequest;
 import com.libgolang.so.Libvfile;
 import com.libgolang.libStruct.ServiceInfoResponse;
 import org.junit.jupiter.api.Test;
@@ -9,7 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestLibController {
     @Test
     public void test() {
-        ServiceInfoResponse serviceInfo = Libvfile.INSTANCE.ServiceInfo();
+        HostInfo hostInfo = new HostInfo( new GoString.ByValue("127.0.0.1"), 8200);
+        ServiceInfoRequest serviceInfoRequest = new ServiceInfoRequest(hostInfo);
+        ServiceInfoResponse serviceInfo = Libvfile.INSTANCE.ServiceInfo(serviceInfoRequest);
         System.out.println(serviceInfo.AcceptProtocol.str);
     }
 }
