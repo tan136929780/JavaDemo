@@ -1,17 +1,15 @@
 package com.libgolang.so;
 
-import com.libgolang.libStruct.ServiceInfoRequest;
-import com.libgolang.libStruct.ServiceInfoResponse;
+import com.libgolang.libStruct.*;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
-import com.sun.jna.Pointer;
 
 public interface Libvfile extends Library {
     Libvfile INSTANCE = Native.load("/Users/tanxianchen/coding/go/src/file-service/vfile_client/libvfile.so", Libvfile.class);
 
     ServiceInfoResponse.ByValue ServiceInfo(ServiceInfoRequest serviceInfoRequest);
 
-    Pointer Upload(Pointer in);
+    UploadResponse Upload(UploadInfoRequest uploadInfoRequest);
 
-    Pointer Download(Pointer in);
+     DownloadResponse Download(DownloadInfoRequest downloadInfoRequest);
 }

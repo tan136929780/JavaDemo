@@ -1,18 +1,17 @@
 package com.libgolang.libStruct;
 
 import com.sun.jna.Structure;
+import lombok.AllArgsConstructor;
 
 import java.util.Arrays;
 import java.util.List;
 
+@AllArgsConstructor
 public class ServiceInfoRequest extends Structure {
     public HostInfo hostInfo;
 
     public ServiceInfoRequest() {
         super();
-    }
-    public ServiceInfoRequest(HostInfo hostInfo) {
-        this.hostInfo = hostInfo;
     }
 
     @Override
