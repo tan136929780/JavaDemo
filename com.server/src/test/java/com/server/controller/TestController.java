@@ -4,6 +4,7 @@ package com.server.controller;
 import com.server.enums.EntityStatus;
 import com.server.enums.Gender;
 import com.server.task.TestTask;
+import com.server.task.TestTask2;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -36,6 +37,18 @@ public class TestController {
                 new Thread(task, "子线程" + i).start();
 
                 System.out.println("子线程返回值：" + task.get() + "\n");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Test
+    public void testThread2() {
+        Runnable runnable = new TestTask2("runnable");
+        for (int i = 0; i < 10; i++) {
+            try {
+                new Thread(runnable);
             } catch (Exception e) {
                 e.printStackTrace();
             }
